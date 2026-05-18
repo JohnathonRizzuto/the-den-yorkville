@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Den — Bar & Grill | Live Music | Yorkville, IL</title>
+<meta name="description" content="Yorkville's spot for cold drinks, great food, and live music every weekend. Kitchen open late. 227 Heustis St, Yorkville, IL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #D4A853;
+  --primary-rgb: 212, 168, 83;
+  --secondary: #252525;
+  --accent: #E8B84D;
+  --accent-rgb: 232, 184, 77;
+  --bg: #1A1A1A;
+  --bg-deep: #111111;
+  --surface: #252525;
+  --surface-light: #2E2E2E;
+  --text: #F5F0E8;
+  --text-muted: #A09080;
+  --border: rgba(245, 240, 232, 0.08);
+  --overlay: rgba(26, 26, 26, 0.85);
+  --glass: rgba(37, 37, 37, 0.6);
+  --glass-border: rgba(245, 240, 232, 0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 30px rgba(var(--accent-rgb), 0.15);
+  --max-w: 1200px;
+  --section-pad: clamp(4rem, 8vw, 8rem);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 1rem;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+.section-pad { padding: var(--section-pad) 0; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+@keyframes float { 0%,100% { transform:translateY(0) rotate(0deg); } 50% { transform:translateY(-16px) rotate(2deg); } }
+@keyframes pulse { 0%,100% { box-shadow:0 0 0 0 rgba(var(--accent-rgb),0.45); } 70% { box-shadow:0 0 0 14px rgba(var(--accent-rgb),0); } }
+
+.reveal { opacity:0; transform:translateY(30px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-child { transition-delay: calc(var(--i,0) * 0.1s); }
+
+/* HEADER */
+header { position:fixed; top:0; left:0; width:100%; z-index:1000; padding:1.25rem 0; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); }
+header.scrolled { padding:0.6rem 0; background:var(--glass); backdrop-filter:blur(16px) saturate(180%); -webkit-backdrop-filter:blur(16px) saturate(180%); border-bottom:1px solid var(--glass-border); box-shadow:var(--shadow-md); }
+.header-inner { display:flex; align-items:center; justify-content:space-between; max-width:var(--max-w); margin:0 auto; padding:0 1.5rem; }
+.header-logo { display:flex; align-items:center; gap:0.75rem; text-decoration:none; color:var(--text); }
+.header-logo img { height:42px; width:auto; border-radius:var(--radius-sm); }
+.header-logo span { font-family:var(--font-display); font-size:1.4rem; font-weight:700; letter-spacing:-0.02em; color:var(--primary); }
+.nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
+.nav-links a { color:var(--text); text-decoration:none; font-size:0.9rem; font-weight:500; letter-spacing:0.02em; position:relative; transition:color 0.3s; }
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:2px; background:var(--primary); transition:width 0.3s; }
+.nav-links a:hover { color:var(--primary); }
+.nav-links a:hover::after { width:100%; }
+.header-right { display:flex; gap:0.75rem; align-items:center; }
+.header-social { color:var(--text-muted); transition:color 0.3s; }
+.header-social:hover { color:var(--primary); }
+.header-cta { display:inline-flex; align-items:center; gap:0.5rem; background:var(--accent); color:var(--bg); padding:0.6rem 1.4rem; border-radius:var(--radius-md); font-weight:600; font-size:0.9rem; text-decoration:none; transition:all 0.3s; white-space:nowrap; }
+.header-cta:hover { background:#f0c45a; transform:translateY(-1px); box-shadow:var(--shadow-glow); }
+.hamburger { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; }
+.hamburger span { display:block; width:24px; height:2px; background:var(--text); margin:5px 0; transition:all 0.3s; border-radius:2px; }
+.hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+.hamburger.active span:nth-child(2) { opacity:0; }
+.hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+.mobile-nav { display:none; position:fixed; top:0; left:0; width:100%; height:100vh; background:rgba(17,17,17,0.97); backdrop-filter:blur(20px); z-index:999; flex-direction:column; align-items:center; justify-content:center; gap:2rem; opacity:0; pointer-events:none; transition:opacity 0.4s; }
+.mobile-nav.open { opacity:1; pointer-events:all; }
+.mobile-nav a { color:var(--text); text-decoration:none; font-family:var(--font-display); font-size:1.8rem; font-weight:600; transition:color 0.3s; }
+.mobile-nav a:hover { color:var(--primary); }
+
+/* HERO */
+.hero { position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; }
+.hero-bg { position:absolute; inset:0; z-index:0; }
+.hero-bg img { width:100%; height:100%; object-fit:cover; will-change:transform; }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(160deg,rgba(17,17,17,0.92) 0%,rgba(26,26,26,0.75) 50%,rgba(17,17,17,0.88) 100%); z-index:1; }
+.hero-blob { position:absolute; width:500px; height:500px; background:radial-gradient(circle,rgba(var(--primary-rgb),0.08) 0%,transparent 70%); border-radius:50%; top:10%; right:-10%; z-index:1; animation:float 6s ease-in-out infinite; pointer-events:none; }
+.hero-content { position:relative; z-index:2; max-width:var(--max-w); margin:0 auto; padding:0 1.5rem; padding-top:6rem; }
+.hero-badge { display:inline-block; background:rgba(var(--primary-rgb),0.15); color:var(--primary); padding:0.4rem 1.2rem; border-radius:var(--radius-pill); font-size:0.85rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:1.5rem; border:1px solid rgba(var(--primary-rgb),0.2); animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2.8rem,5.5vw,5rem); font-weight:800; line-height:1.1; letter-spacing:-0.03em; color:var(--text); margin-bottom:1.5rem; max-width:700px; animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
+.hero h1 .accent { color:var(--primary); }
+.hero-sub { font-size:clamp(1.05rem,1.5vw,1.25rem); color:var(--text-muted); max-width:520px; margin-bottom:2.5rem; line-height:1.7; animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.6s both; }
+.hero-btns { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.8s both; }
+.btn-primary { display:inline-flex; align-items:center; gap:0.6rem; background:var(--accent); color:var(--bg); padding:1rem 2.2rem; border-radius:var(--radius-md); font-weight:700; font-size:1.05rem; text-decoration:none; transition:all 0.3s; animation:pulse 2.5s ease-in-out infinite; border:none; cursor:pointer; font-family:var(--font-body); }
+.btn-primary:hover { background:#f0c45a; transform:translateY(-2px); box-shadow:0 8px 30px rgba(var(--accent-rgb),0.3); }
+.btn-secondary { display:inline-flex; align-items:center; gap:0.6rem; background:transparent; color:var(--text); padding:1rem 2.2rem; border-radius:var(--radius-md); font-weight:600; font-size:1.05rem; text-decoration:none; border:1px solid var(--border); transition:all 0.3s; cursor:pointer; font-family:var(--font-body); }
+.btn-secondary:hover { border-color:var(--primary); color:var(--primary); transform:translateY(-2px); }
+
+/* STATS */
+.stats-bar { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:2.5rem 0; }
+.stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; text-align:center; }
+.stat-item h3 { font-family:var(--font-display); font-size:1.3rem; font-weight:700; color:var(--primary); margin-bottom:0.3rem; }
+.stat-item p { color:var(--text-muted); font-size:0.9rem; }
+
+/* ABOUT */
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+.about-img { border-radius:var(--radius-xl); overflow:hidden; box-shadow:var(--shadow-lg); }
+.about-img img { width:100%; height:400px; object-fit:cover; transition:transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+.about-img:hover img { transform:scale(1.04); }
+.section-label { display:inline-block; color:var(--primary); font-weight:600; font-size:0.85rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1rem; }
+.section-title { font-family:var(--font-display); font-size:clamp(2rem,3.5vw,3rem); font-weight:800; letter-spacing:-0.03em; margin-bottom:1rem; line-height:1.15; }
+.section-sub { color:var(--text-muted); font-size:1.05rem; max-width:560px; line-height:1.7; }
+.section-header { margin-bottom:3rem; }
+.section-header.center { text-align:center; }
+.section-header.center .section-sub { margin:0 auto; }
+.about-text p { color:var(--text-muted); font-size:1.05rem; line-height:1.8; margin-bottom:1rem; }
+
+/* MENU */
+.menu-section { background:var(--bg-deep); }
+.menu-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; }
+.menu-card { background:var(--surface); border-radius:var(--radius-lg); padding:2rem; border:1px solid var(--border); transition:all 0.4s cubic-bezier(0.16,1,0.3,1); box-shadow:var(--shadow-sm); }
+.menu-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:rgba(var(--primary-rgb),0.2); }
+.menu-card h3 { font-family:var(--font-display); font-size:1.4rem; font-weight:700; color:var(--primary); margin-bottom:1.5rem; padding-bottom:0.75rem; border-bottom:2px solid rgba(var(--primary-rgb),0.15); }
+.menu-item { display:flex; justify-content:space-between; align-items:baseline; padding:0.6rem 0; border-bottom:1px solid rgba(245,240,232,0.04); }
+.menu-item:last-child { border-bottom:none; }
+.menu-item-name { font-weight:500; font-size:0.95rem; }
+.menu-item-price { color:var(--primary); font-weight:600; font-size:0.95rem; white-space:nowrap; margin-left:1rem; }
+.menu-footnote { text-align:center; color:var(--text-muted); font-size:0.85rem; margin-top:2rem; font-style:italic; }
+
+/* GALLERY */
+.gallery-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+.gallery-item { border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-md); aspect-ratio:16/10; }
+.gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+.gallery-item:hover img { transform:scale(1.06); }
+
+/* LIVE MUSIC */
+.live-music { background:linear-gradient(160deg,var(--bg-deep) 0%,var(--surface) 100%); position:relative; overflow:hidden; }
+.live-music-blob { position:absolute; width:400px; height:400px; background:radial-gradient(circle,rgba(var(--primary-rgb),0.06) 0%,transparent 70%); border-radius:50%; bottom:-100px; left:-100px; animation:float 8s ease-in-out infinite; pointer-events:none; }
+.live-music-inner { text-align:center; max-width:680px; margin:0 auto; position:relative; z-index:1; }
+.live-music-inner h2 { font-family:var(--font-display); font-size:clamp(2.2rem,4vw,3.5rem); font-weight:800; letter-spacing:-0.03em; margin-bottom:1.5rem; line-height:1.1; }
+.live-music-inner p { color:var(--text-muted); font-size:1.1rem; line-height:1.8; margin-bottom:2.5rem; }
+.music-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(var(--primary-rgb),0.12); color:var(--primary); padding:0.5rem 1.2rem; border-radius:var(--radius-pill); font-weight:600; font-size:0.9rem; margin-bottom:2rem; border:1px solid rgba(var(--primary-rgb),0.2); }
+
+/* TESTIMONIALS */
+.testimonials { background:var(--bg-deep); }
+.test-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; }
+.test-card { background:var(--surface); border-radius:var(--radius-lg); padding:2rem; border:1px solid var(--border); border-top:3px solid var(--primary); transition:all 0.4s cubic-bezier(0.16,1,0.3,1); box-shadow:var(--shadow-sm); }
+.test-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+.test-quote { font-family:var(--font-display); font-size:3rem; color:var(--primary); line-height:1; margin-bottom:0.5rem; opacity:0.4; }
+.test-card p { color:var(--text-muted); font-size:1rem; line-height:1.7; margin-bottom:1.5rem; font-style:italic; }
+.test-author { display:flex; align-items:center; gap:0.75rem; }
+.test-avatar { width:40px; height:40px; border-radius:50%; background:var(--surface-light); display:flex; align-items:center; justify-content:center; color:var(--primary); font-weight:700; font-size:0.9rem; }
+.test-name { font-weight:600; font-size:0.9rem; }
+.test-stars { color:var(--primary); font-size:0.8rem; margin-top:0.15rem; }
+
+/* CONTACT */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
+.contact-info-block { display:flex; flex-direction:column; gap:2rem; }
+.contact-item { display:flex; gap:1rem; align-items:flex-start; }
+.contact-icon { width:48px; height:48px; background:rgba(var(--primary-rgb),0.1); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--primary); }
+.contact-item h4 { font-weight:600; margin-bottom:0.25rem; font-size:0.95rem; }
+.contact-item p,.contact-item a { color:var(--text-muted); font-size:0.9rem; text-decoration:none; transition:color 0.3s; }
+.contact-item a:hover { color:var(--primary); }
+.hours-table { width:100%; border-collapse:collapse; }
+.hours-table tr { border-bottom:1px solid var(--border); }
+.hours-table td { padding:0.5rem 0; font-size:0.9rem; }
+.hours-table td:first-child { font-weight:500; }
+.hours-table td:last-child { text-align:right; color:var(--text-muted); }
+.map-wrap { border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-md); border:1px solid var(--border); }
+.map-wrap iframe { width:100%; height:350px; border:none; display:block; }
+
+/* CTA BAND */
+.cta-band { background:linear-gradient(135deg,var(--surface) 0%,var(--bg-deep) 100%); text-align:center; padding:4rem 1.5rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.cta-band h2 { font-family:var(--font-display); font-size:clamp(1.8rem,3vw,2.5rem); font-weight:800; letter-spacing:-0.02em; margin-bottom:1rem; }
+.cta-band p { color:var(--text-muted); font-size:1.05rem; margin-bottom:2rem; }
+
+/* FOOTER */
+footer { background:var(--bg-deep); padding:4rem 0 0; border-top:1px solid var(--border); }
+.footer-grid { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:3rem; padding-bottom:3rem; }
+.footer-col h4 { font-family:var(--font-display); font-weight:700; font-size:1.1rem; margin-bottom:1.25rem; color:var(--text); }
+.footer-col p,.footer-col a,.footer-col li { color:var(--text-muted); font-size:0.9rem; line-height:1.8; text-decoration:none; list-style:none; }
+.footer-col a:hover { color:var(--primary); }
+.footer-col ul { list-style:none; }
+.footer-col li { margin-bottom:0.5rem; }
+.footer-socials { display:flex; gap:1rem; margin-top:1rem; }
+.footer-socials a { display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background:var(--surface); color:var(--text-muted); transition:all 0.3s; border:1px solid var(--border); }
+.footer-socials a:hover { background:var(--primary); color:var(--bg); border-color:var(--primary); }
+.footer-bottom { border-top:1px solid var(--border); padding:1.5rem 0; display:flex; justify-content:space-between; align-items:center; font-size:0.85rem; color:var(--text-muted); }
+.footer-bottom a { color:var(--primary); text-decoration:none; }
+.footer-bottom a:hover { text-decoration:underline; }
+
+/* MOBILE CTA */
+.mobile-cta { display:none; position:fixed; bottom:0; left:0; width:100%; padding:0.75rem 1.5rem; background:var(--glass); backdrop-filter:blur(16px) saturate(180%); -webkit-backdrop-filter:blur(16px) saturate(180%); border-top:1px solid var(--glass-border); z-index:998; }
+.mobile-cta a { display:block; text-align:center; background:var(--accent); color:var(--bg); padding:0.9rem; border-radius:var(--radius-md); font-weight:700; font-size:1rem; text-decoration:none; animation:pulse 2.5s ease-in-out infinite; }
+
+.icon { width:20px; height:20px; fill:currentColor; }
+.icon-lg { width:24px; height:24px; }
+
+@media (max-width:1024px) {
+  .nav-links,.header-right .header-social { display:none; }
+  .hamburger { display:block; }
+  .mobile-nav { display:flex; }
+  .about-grid,.menu-grid,.contact-grid { grid-template-columns:1fr; }
+  .test-grid { grid-template-columns:1fr; }
+  .footer-grid { grid-template-columns:1fr 1fr; gap:2rem; }
+  .about-grid { gap:2rem; }
+}
+@media (max-width:768px) {
+  .mobile-cta { display:block; }
+  .stats-grid { grid-template-columns:1fr; gap:1.5rem; }
+  .gallery-grid { grid-template-columns:1fr; }
+  .hero { min-height:90vh; }
+  .footer-grid { grid-template-columns:1fr; }
+  body { padding-bottom:70px; }
+}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="header-inner">
+    <a href="#" class="header-logo">
+      <!-- AI-GENERATED LOGO -- replace with real logo when owner provides one -->
+      <img src="https://export-download.canva.com/kNbkA/DAHKDYkNbkA/-1/0/0001-883209160367523331.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260518%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260518T214109Z&X-Amz-Expires=7483&X-Amz-Signature=af7d49c07e2a5d84addfa9f8ad905eb355c328f242d0f452c4aff63b1860dfd0&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Mon%2C%2018%20May%202026%2023%3A45%3A52%20GMT" alt="The Den logo">
+      <span>The Den</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#music">Live Music</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="header-right">
+      <a href="https://www.facebook.com/thedenyorkville" target="_blank" rel="noopener" aria-label="Facebook" class="header-social">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/thedenyorkville/" target="_blank" rel="noopener" aria-label="Instagram" class="header-social">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+      </a>
+      <a href="tel:6303819390" class="header-cta">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        Call Now
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#menu" onclick="closeMobile()">Menu</a>
+  <a href="#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="#music" onclick="closeMobile()">Live Music</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="tel:6303819390" class="btn-primary" onclick="closeMobile()" style="margin-top:1rem;">Call Now</a>
+</div>
+
+<section class="hero">
+  <div class="hero-bg">
+    <!-- AI-GENERATED HERO -- can be replaced with owner's photo -->
+    <img src="https://export-download.canva.com/9RZ-I/DAHKDb9RZ-I/-1/0/0001-957518554789543040.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260518%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260518T090642Z&X-Amz-Expires=51248&X-Amz-Signature=024b26eafbb6cac6b4e813b3b78426c9320bd6ff0dcaa96b5463e39c7df4e9be&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Mon%2C%2018%20May%202026%2023%3A20%3A50%20GMT" alt="The Den bar and grill" id="heroImg">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-blob"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Yorkville, IL</div>
+    <h1>Good Food.<br>Cold Drinks.<br><span class="accent">Live Music.</span></h1>
+    <p class="hero-sub">Your neighborhood bar and grill where the kitchen stays open late and the music keeps going. Pull up a seat.</p>
+    <div class="hero-btns">
+      <a href="tel:6303819390" class="btn-primary">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        Call to Book
+      </a>
+      <a href="#menu" class="btn-secondary">See the Menu</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div class="stat-item reveal-child" style="--i:0"><h3>Live Music Weekly</h3><p>Every Friday &amp; Saturday night</p></div>
+      <div class="stat-item reveal-child" style="--i:1"><h3>Kitchen Open Late</h3><p>Serving food until close</p></div>
+      <div class="stat-item reveal-child" style="--i:2"><h3>Full Bar</h3><p>Draft beer, cocktails, wine &amp; more</p></div>
+    </div>
+  </div>
+</div>
+
+<section id="about" class="section-pad">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img reveal">
+        <!-- REPLACE WITH REAL PHOTO -- this placeholder has been color-matched to your brand -->
+        <img src="https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:157b270f-efb9-41fb-88b8-76c3dc3dbb39" alt="The Den interior">
+      </div>
+      <div class="about-text reveal">
+        <span class="section-label">About The Den</span>
+        <h2 class="section-title">Yorkville's Spot for a Good Time</h2>
+        <p>No pretense. No dress code. Just a place where you grab a cold one, order something off the grill, and catch live music on the weekends. The Den sits right on Heustis in downtown Yorkville -- the kind of neighborhood bar every town needs.</p>
+        <p>Formerly known as Dakotas, the space got a fresh start with the same laid-back energy. The vibe is mellow, the food hits, and the staff actually pays attention. Walk in a stranger, leave a regular.</p>
+        <a href="tel:6303819390" class="btn-secondary" style="margin-top:1rem;">Give Us a Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu" class="menu-section section-pad">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-label">What's Cooking</span>
+      <h2 class="section-title">Menu Highlights</h2>
+      <p class="section-sub">From loaded nachos to smash burgers, the kitchen keeps it real. Everything made fresh, nothing fancy -- just good.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card reveal reveal-child" style="--i:0">
+        <h3>Appetizers</h3>
+        <div class="menu-item"><span class="menu-item-name">Loaded Nachos</span><span class="menu-item-price">$12 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">Mozzarella Sticks</span><span class="menu-item-price">$9 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">Fried Pickles</span><span class="menu-item-price">$8 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">Soft Pretzel Bites</span><span class="menu-item-price">$10 &#10038;</span></div>
+      </div>
+      <div class="menu-card reveal reveal-child" style="--i:1">
+        <h3>Burgers &amp; Sandwiches</h3>
+        <div class="menu-item"><span class="menu-item-name">The Den Smash Burger</span><span class="menu-item-price">$14 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">BBQ Bacon Burger</span><span class="menu-item-price">$15 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">Crispy Chicken Sandwich</span><span class="menu-item-price">$13 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">Philly Cheesesteak</span><span class="menu-item-price">$14 &#10038;</span></div>
+      </div>
+      <div class="menu-card reveal reveal-child" style="--i:2">
+        <h3>Wings</h3>
+        <div class="menu-item"><span class="menu-item-name">6 Piece</span><span class="menu-item-price">$10 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">12 Piece</span><span class="menu-item-price">$18 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">Sauces: Buffalo, BBQ, Garlic Parm, Honey Sriracha</span><span class="menu-item-price"></span></div>
+      </div>
+      <div class="menu-card reveal reveal-child" style="--i:3">
+        <h3>Drinks</h3>
+        <div class="menu-item"><span class="menu-item-name">Draft Beer (pint)</span><span class="menu-item-price">$6 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">Domestic Bottles</span><span class="menu-item-price">$4 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">Craft Cocktails</span><span class="menu-item-price">$10 &#10038;</span></div>
+        <div class="menu-item"><span class="menu-item-name">House Wine (glass)</span><span class="menu-item-price">$8 &#10038;</span></div>
+      </div>
+    </div>
+    <p class="menu-footnote">&#10038; Prices shown are placeholders -- confirm with owner before launch.</p>
+  </div>
+</section>
+
+<section id="gallery" class="section-pad">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-label">The Vibe</span>
+      <h2 class="section-title">See the Space</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal reveal-child" style="--i:0">
+        <!-- REPLACE WITH REAL PHOTO -- this placeholder has been color-matched to your brand -->
+        <img src="https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:157b270f-efb9-41fb-88b8-76c3dc3dbb39" alt="Bar area at The Den" loading="lazy">
+      </div>
+      <div class="gallery-item reveal reveal-child" style="--i:1">
+        <!-- REPLACE WITH REAL PHOTO -- this placeholder has been color-matched to your brand -->
+        <img src="https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:4144415f-b8d1-441f-9af4-981610b1f94c" alt="Dining at The Den" loading="lazy">
+      </div>
+      <div class="gallery-item reveal reveal-child" style="--i:2">
+        <!-- REPLACE WITH REAL PHOTO -->
+        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&q=80" alt="Bar grill atmosphere" loading="lazy" style="filter:sepia(0.08) saturate(1.15) brightness(0.95);">
+      </div>
+      <div class="gallery-item reveal reveal-child" style="--i:3">
+        <!-- REPLACE WITH REAL PHOTO -->
+        <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&q=80" alt="Live music stage" loading="lazy" style="filter:sepia(0.08) saturate(1.15) brightness(0.9);">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="music" class="live-music section-pad">
+  <div class="live-music-blob"></div>
+  <div class="container">
+    <div class="live-music-inner reveal">
+      <div class="music-badge">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        Live Entertainment
+      </div>
+      <h2>Catch a Show<br>Every <span style="color:var(--primary)">Weekend</span></h2>
+      <p>Friday and Saturday nights, the stage lights up. Local bands, solo acts, open mic nights -- there's always something going on. Grab a table early, order a round, and let the music do the rest.</p>
+      <a href="https://www.facebook.com/thedenyorkville" target="_blank" rel="noopener" class="btn-primary">See Upcoming Shows</a>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials section-pad">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-label">Word on the Street</span>
+      <h2 class="section-title">What People Are Saying</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal reveal-child" style="--i:0">
+        <div class="test-quote">"</div>
+        <p>Place is super clean and the staff keeps things running smooth. Sat at the bar and had a great time just watching the game. Solid spot.</p>
+        <div class="test-author"><div class="test-avatar">M</div><div><div class="test-name">Mike</div><div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div></div>
+      </div>
+      <div class="test-card reveal reveal-child" style="--i:1">
+        <div class="test-quote">"</div>
+        <p>Mellow vibe, not too loud, not too dead. Perfect for grabbing food and drinks with friends on a weeknight. The wings are no joke.</p>
+        <div class="test-author"><div class="test-avatar">J</div><div><div class="test-name">Jessica</div><div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div></div>
+      </div>
+      <div class="test-card reveal reveal-child" style="--i:2">
+        <div class="test-quote">"</div>
+        <p>You can tell they pay attention to the little things. The food came out fast, drinks were strong, and the live music on Saturday was a bonus.</p>
+        <div class="test-author"><div class="test-avatar">R</div><div><div class="test-name">Rachel</div><div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section-pad">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-label">Find Us</span>
+      <h2 class="section-title">Come Through</h2>
+      <p class="section-sub">Right on Heustis in downtown Yorkville. Walk-ins always welcome.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info-block reveal">
+        <div class="contact-item">
+          <div class="contact-icon"><svg class="icon-lg" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div><h4>Address</h4><a href="https://maps.apple.com/?q=227+Heustis+St+Yorkville+IL+60560" target="_blank" rel="noopener">227 Heustis St, Yorkville, IL 60560</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg class="icon-lg" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div><h4>Phone</h4><a href="tel:6303819390">(630) 381-9390</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg class="icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><polyline points="12 6 12 12 16 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div><h4>Hours</h4>
+            <table class="hours-table">
+              <tr><td>Monday - Thursday</td><td>11 AM - 1 AM</td></tr>
+              <tr><td>Friday - Saturday</td><td>11 AM - 2 AM</td></tr>
+              <tr><td>Sunday</td><td>11 AM - 12 AM</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe src="https://www.google.com/maps?q=227+Heustis+St+Yorkville+IL+60560&output=embed" allowfullscreen loading="lazy" title="The Den on map"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band reveal">
+  <div class="container">
+    <h2>Ready for a Good Time?</h2>
+    <p>Kitchen's open, the bar's stocked, and there might be a band playing tonight.</p>
+    <a href="tel:6303819390" class="btn-primary" style="font-size:1.1rem;padding:1.1rem 2.8rem;">Call Now -- (630) 381-9390</a>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>The Den</h4>
+        <p>Bar &amp; grill with live music in downtown Yorkville. Good food, cold drinks, and a laid-back atmosphere every night of the week.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/thedenyorkville" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://www.instagram.com/thedenyorkville/" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul><li><a href="#about">About</a></li><li><a href="#menu">Menu</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#music">Live Music</a></li><li><a href="#contact">Contact</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hours</h4>
+        <ul><li>Mon - Thu: 11 AM - 1 AM</li><li>Fri - Sat: 11 AM - 2 AM</li><li>Sun: 11 AM - 12 AM</li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <p><a href="https://maps.apple.com/?q=227+Heustis+St+Yorkville+IL+60560" target="_blank" rel="noopener">227 Heustis St<br>Yorkville, IL 60560</a></p>
+        <p style="margin-top:0.75rem;"><a href="tel:6303819390">(630) 381-9390</a></p>
+        <a href="tel:6303819390" class="btn-primary" style="margin-top:1.25rem;font-size:0.9rem;padding:0.7rem 1.5rem;">Call to Book</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 The Den. All rights reserved.</span>
+      <span>Website by <a href="https://johnathon-builds.vercel.app" target="_blank" rel="noopener">Johnathon Builds</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-cta"><a href="tel:6303819390">Call Now -- (630) 381-9390</a></div>
+
+<script>
+const header=document.getElementById('header');
+window.addEventListener('scroll',()=>{
+  header.classList.toggle('scrolled',window.scrollY>80);
+  const h=document.getElementById('heroImg');
+  if(h&&window.scrollY<window.innerHeight)h.style.transform='translateY('+(window.scrollY*0.3)+'px)';
+},{passive:true});
+const hamburger=document.getElementById('hamburger'),mobileNav=document.getElementById('mobileNav');
+hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');mobileNav.classList.toggle('open');document.body.style.overflow=mobileNav.classList.contains('open')?'hidden':'';});
+function closeMobile(){hamburger.classList.remove('active');mobileNav.classList.remove('open');document.body.style.overflow='';}
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target);}});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+reveals.forEach(el=>obs.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
+</script>
+</body>
+</html>
