@@ -1448,13 +1448,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
     modal.id = 'jb-modal';
     modal.innerHTML = [
       '<div class="jb-modal-card" style="max-width:580px">',
-      '  <h3>Visual editor cheatsheet (v2)</h3>',
+      '  <h3>Visual editor cheatsheet (v3)</h3>',
       '  <p><strong>Edit text:</strong> click any heading, paragraph, link, or list item. Type. Click away.</p>',
-      '  <p><strong>Swap image:</strong> click any image. Upload a photo from your phone or paste a URL.</p>',
+      '  <p><strong>Per-element styling (new):</strong> when you click any text element, a panel appears at the bottom-right (or bottom on mobile) with font / size / weight / spacing / color / align controls -- changes ONLY that element. Use the Reset button to clear overrides.</p>',
+      '  <p><strong>Swap image:</strong> click any image. Big "Tap to pick a photo" opens your camera roll on phone, or paste a URL via the small toggle below.</p>',
       '  <p><strong>Delete/hide:</strong> hover any card, section, or element. Click the red X to hide it. Click X again to restore.</p>',
-      '  <p><strong>Style:</strong> click <em>Style</em> in toolbar. Adjust every color and pick a font pairing.</p>',
-      '  <p><strong>Sections:</strong> click <em>Sections</em>. See every section listed -- click name to scroll, eye to toggle visibility.</p>',
-      '  <p><strong>Save:</strong> the amber Save button pushes everything to GitHub. Vercel redeploys in ~15s.</p>',
+      '  <p><strong>Style drawer:</strong> click <em>Style</em>. Adjust every site color, pick a whole-site font pairing, OR use the <em>Numbers font</em> picker to fix ugly stat displays without touching the rest.</p>',
+      '  <p><strong>Sections:</strong> click <em>Sections</em>. Every section listed -- click name to scroll, eye to toggle visibility.</p>',
+      '  <p><strong>Save:</strong> amber Save button pushes everything to GitHub. Vercel redeploys in ~15s.</p>',
       '  <p style="color:#fbbf24"><strong>Tip:</strong> editor stays inert without ?edit=jb2026 in the URL. Visitors see the normal site.</p>',
       '  <div class="jb-modal-actions"><button id="jb-help-ok" class="primary">Got it</button></div>',
       '</div>'
